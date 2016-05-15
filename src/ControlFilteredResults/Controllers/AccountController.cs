@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace ControlFilteredResults.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -127,6 +126,7 @@ namespace ControlFilteredResults.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
