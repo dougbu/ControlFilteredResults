@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ControlFilteredResults.Models;
+using ControlFilteredResults.Models.AccountViewModels;
+using ControlFilteredResults.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using ControlFilteredResults.Models;
-using ControlFilteredResults.Models.AccountViewModels;
-using ControlFilteredResults.Services;
 
 namespace ControlFilteredResults.Controllers
 {
