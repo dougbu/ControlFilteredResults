@@ -5,8 +5,8 @@ using ControlFilteredResults.Data;
 using ControlFilteredResults.Models;
 using ControlFilteredResults.Other;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 namespace ControlFilteredResults.Controllers
@@ -75,8 +75,6 @@ namespace ControlFilteredResults.Controllers
         {
             if (ModelState.IsValid)
             {
-                fileList.FileNames.RemoveAll(file => string.IsNullOrEmpty(file.Name));
-
                 _context.Add(fileList);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -88,25 +86,15 @@ namespace ControlFilteredResults.Controllers
         // POST: FileList/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [ActionName("Create")]
         [Consumes("multipart/form-data")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string name, IFormFileCollection files)
+        public async Task<IActionResult> CreateFiles(
+            [Bind(nameof(FileList.Name), nameof(FileList.Files))] FileList fileList)
         {
-            var fileList = new FileList
-            {
-                Name = name,
-                Files = files,
-                FileNames = new List<File>(),
-            };
-
             if (ModelState.IsValid)
             {
-                foreach (var file in files)
-                {
-                    fileList.FileNames.Add(new File { Name = file.FileName });
-                }
-
                 _context.Add(fileList);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -196,6 +184,35 @@ namespace ControlFilteredResults.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
+        }
+
+        public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        {
+            foreach (var argument in context.ActionArguments.Values)
+            {
+                var fileList = argument as FileList;
+                if (fileList != null)
+                {
+                    if (fileList.FileNames == null)
+                    {
+                        fileList.FileNames = new List<File>();
+                    }
+                    else
+                    {
+                        fileList.FileNames.RemoveAll(file => string.IsNullOrEmpty(file.Name));
+                    }
+
+                    if (fileList.Files != null)
+                    {
+                        foreach (var file in fileList.Files)
+                        {
+                            fileList.FileNames.Add(new File { Name = file.FileName });
+                        }
+                    }
+                }
+            }
+
+            return base.OnActionExecutionAsync(context, next);
         }
 
         private bool FileListExists(int id)
