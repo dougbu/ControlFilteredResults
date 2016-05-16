@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ControlFilteredResults.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class FileListController : Controller
     {
         private readonly FileListContext _context;
@@ -21,8 +22,8 @@ namespace ControlFilteredResults.Controllers
             _context = context;
         }
 
-        [AllowAnonymous]
         // GET: FileList
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.FileList.ToListAsync());

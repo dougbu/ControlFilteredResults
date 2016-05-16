@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ControlFilteredResults.Controllers
 {
+    [RequireHttps]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

@@ -45,7 +45,10 @@ namespace ControlFilteredResults
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.SslPort = 44338;
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
