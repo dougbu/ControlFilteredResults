@@ -1,5 +1,6 @@
 ﻿using ControlFilteredResults.Data;
 using ControlFilteredResults.Models;
+using ControlFilteredResults.Other;
 using ControlFilteredResults.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +48,8 @@ namespace ControlFilteredResults
 
             services.AddMvc(options =>
             {
+                options.Filters.Add(typeof(DisableClientValidationFilter));
+                options.Filters.Add(typeof(RandomNameAttribute));
                 options.SslPort = 44338;
             });
 
