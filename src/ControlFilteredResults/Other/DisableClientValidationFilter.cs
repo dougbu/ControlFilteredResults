@@ -19,7 +19,9 @@ namespace ControlFilteredResults.Other
 
         public Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
         {
-            if (string.Equals(context.ActionDescriptor.Name, nameof(BaseController.Create), StringComparison.Ordinal) &&
+            object action;
+            context.RouteData.Values.TryGetValue("action", out action);
+            if (string.Equals(action as string, nameof(BaseController.Create), StringComparison.Ordinal) &&
                 (context.Result is ViewResult || context.Result is ViewViewComponentResult))
             {
                 var savedValidation = _options.HtmlHelperOptions.ClientValidationEnabled;

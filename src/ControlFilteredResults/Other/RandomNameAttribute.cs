@@ -16,7 +16,9 @@ namespace ControlFilteredResults.Other
         public void OnActionExecuting(ActionExecutingContext context)
         {
             // Generate a random name if Create submission left out required Name value.
-            if (string.Equals(context.ActionDescriptor.Name, nameof(BaseController.Create), StringComparison.Ordinal) &&
+            object action;
+            context.RouteData.Values.TryGetValue("action", out action);
+            if (string.Equals(action as string, nameof(BaseController.Create), StringComparison.Ordinal) &&
                 !context.ModelState.IsValid &&
                 context.ModelState.Remove(nameof(FileList.Name)))
             {
