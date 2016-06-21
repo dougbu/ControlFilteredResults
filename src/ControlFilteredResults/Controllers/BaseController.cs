@@ -64,7 +64,6 @@ namespace ControlFilteredResults.Controllers
         }
 
         // GET: Base/Details/5
-        [RequireHttps]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -89,7 +88,6 @@ namespace ControlFilteredResults.Controllers
         }
 
         // GET: Base/Create
-        [RequireHttps]
         [TypeFilter(typeof(DisableClientValidationFilter))]
         public IActionResult Create()
         {
@@ -106,7 +104,6 @@ namespace ControlFilteredResults.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [RandomName]
-        [RequireHttps]
         [TypeFilter(typeof(HandleInvalidOperationFilter))]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name")] FileList fileList)
@@ -134,7 +131,6 @@ namespace ControlFilteredResults.Controllers
         }
 
         // GET: Base/Edit/5
-        [RequireHttps]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -162,7 +158,6 @@ namespace ControlFilteredResults.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [RequireHttps]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] FileList fileList)
         {
@@ -204,7 +199,6 @@ namespace ControlFilteredResults.Controllers
         }
 
         // GET: Base/Delete/5
-        [RequireHttps]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -231,7 +225,6 @@ namespace ControlFilteredResults.Controllers
         // POST: Base/Delete/5
         [ActionName("Delete")]
         [HttpPost]
-        [RequireHttps]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

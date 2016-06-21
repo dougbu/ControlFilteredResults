@@ -36,10 +36,8 @@ namespace ControlFilteredResults
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<FileListContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("AnotherConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
+            services.AddDbContext<FileListContext>(options => options.UseInMemoryDatabase());
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

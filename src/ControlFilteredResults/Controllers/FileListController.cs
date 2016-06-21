@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 namespace ControlFilteredResults.Controllers
 {
     [Authorize]
-    [RequireHttps]
     public class FileListController : Controller
     {
         private readonly FileListContext _context;
