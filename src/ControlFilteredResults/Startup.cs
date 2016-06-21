@@ -50,7 +50,7 @@ namespace ControlFilteredResults
             {
                 options.Filters.Add(typeof(DisableClientValidationFilter));
                 options.Filters.Add(typeof(RandomNameAttribute));
-                options.SslPort = 44338;
+                options.SslPort = 44331;
             });
 
             // Add application services.
