@@ -90,6 +90,7 @@ namespace ControlFilteredResults.Controllers
 
         // GET: Base/Create
         [RequireHttps]
+        [TypeFilter(typeof(DisableClientValidationFilter))]
         public IActionResult Create()
         {
             return new ViewResult
@@ -104,6 +105,7 @@ namespace ControlFilteredResults.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [RandomName]
         [RequireHttps]
         [TypeFilter(typeof(HandleInvalidOperationFilter))]
         [ValidateAntiForgeryToken]
