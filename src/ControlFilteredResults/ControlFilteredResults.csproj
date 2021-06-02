@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <PackageId>ControlFilteredResults</PackageId>
     <UserSecretsId>aspnet-ControlFilteredResults-ea1a1752-9605-456d-a014-561ddc682f8e</UserSecretsId>
-    <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>1.0.5</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;dnxcore50;portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
 
